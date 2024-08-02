@@ -1,38 +1,59 @@
 import React, { useEffect, useState } from "react";
-import { Text, View, StyleSheet, Image, Pressable } from "react-native";
+import {
+  Text,
+  View,
+  StyleSheet,
+  Image,
+  Pressable,
+  ImageSourcePropType,
+} from "react-native";
 import { pins } from "@/constants/Pins";
 import { FlatList } from "react-native-gesture-handler";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
-export default function PinComponent() {
-  const [ratio, setRatio] = useState<{ [key: string]: number }>({});
-  const [likedPin, setLikedPin] = useState<{ [key: string]: boolean }>({});
+interface Pin {
+  image: ImageSourcePropType;
+  title: string;
+  id: string;
+}
 
-  const onLike = (id: string) => {
-    setLikedPin((prevLikedPins) => ({
-      ...prevLikedPins,
-      [id]: !prevLikedPins[id],
-    }));
-  };
+interface Props {
+  pin: Pin;
+}
 
-  const getImageRatio = (image: any, id: string) => {
-    const { width, height } = Image.resolveAssetSource(image);
-    setRatio((prevRatio) => ({
-      ...prevRatio,
-      [id]: width / height,
-    }));
-    console.log(
-      `Image ID: ${id}, Width: ${width}, Height: ${height}, Ratio: ${
-        width / height
-      }`
-    );
-  };
+export default function PinComponent(props: Props) {
+  const { image, title, id } = props.pin;
+
+  //   const [ratio, setRatio] = useState<{ [key: string]: number }>({});
+  //   const [likedPin, setLikedPin] = useState<{ [key: string]: boolean }>({});
+  const [ratio, setRatio] = useState(1);
+
+  //   const onLike = (id: string) => {
+  //     setLikedPin((prevLikedPins) => ({
+  //       ...prevLikedPins,
+  //       [id]: !prevLikedPins[id],
+  //     }));
+  //   };
+
+  //   const getImageRatio = (image: any, id: string) => {
+  //     const { width, height } = Image.resolveAssetSource(image);
+  //     setRatio((prevRatio) => ({
+  //       ...prevRatio,
+  //       [id]: width / height,
+  //     }));
+  //     console.log(
+  //       `Image ID: ${id}, Width: ${width}, Height: ${height}, Ratio: ${
+  //         width / height
+  //       }`
+  //     );
+  //   };
 
   useEffect(() => {
-    pins.forEach((pin) => {
-      getImageRatio(pin.image, pin.id.toString());
-    });
-  }, []);
+    if (image) {
+      const { width, height } = Image.resolveAssetSource(image);
+      setRatio(width / height);
+    }
+  }, [image]);
 
   useEffect(() => {
     console.log("Updated Ratios: ", ratio);
@@ -40,9 +61,10 @@ export default function PinComponent() {
 
   return (
     <View>
-      <FlatList
+      {/* <FlatList
         data={pins}
         keyExtractor={(item) => item.id.toString()}
+        numColumns={2}
         renderItem={({ item }) => (
           <View style={styles.pin}>
             <Image
@@ -53,20 +75,31 @@ export default function PinComponent() {
               ]}
             />
             <View>
-              <Pressable>
-                <Ionicons
-                  name={likedPin[item.id] ? "heart" : "heart-outline"}
-                  size={24}
-                  color="black"
-                  style={styles.heartBtn}
-                  onPress={() => onLike(item.id)}
-                />
-              </Pressable>
+              
             </View>
             <Text style={styles.title}>{item.title}</Text>
           </View>
         )}
-      />
+      /> */}
+      <View style={styles.pin}>
+        <View>
+          <Image
+            source={image}
+            style={[styles.image, { aspectRatio: ratio }]}
+          />
+          <Pressable>
+            <Ionicons
+              //   name={likedPin[item.id] ? "heart" : "heart-outline"}
+              name="heart"
+              size={16}
+              color="black"
+              style={styles.heartBtn}
+              //   onPress={() => onLike(item.id)}
+            />
+          </Pressable>
+        </View>
+        <Text style={styles.title}>{title}</Text>
+      </View>
     </View>
   );
 }
@@ -74,6 +107,7 @@ export default function PinComponent() {
 const styles = StyleSheet.create({
   pin: {
     width: "100%",
+    padding: 4,
   },
   heartBtn: {
     backgroundColor: "#D3CFD4",

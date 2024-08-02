@@ -1,6 +1,7 @@
 import PinComponent from "@/components/PinComponent";
+import { pins } from "@/constants/Pins";
 import * as React from "react";
-import { Text, View, StyleSheet, ScrollView } from "react-native";
+import { Text, View, StyleSheet, ScrollView, Image } from "react-native";
 import {
   GestureHandlerRootView,
   NativeViewGestureHandler,
@@ -10,9 +11,23 @@ export default function HomeScreen() {
   return (
     <GestureHandlerRootView>
       <NativeViewGestureHandler>
-        <View style={styles.container}>
-          <PinComponent />
-        </View>
+        <ScrollView>
+          <View style={styles.container}>
+            <View style={{ flex: 1 }}>
+              <PinComponent pin={pins[1]} />
+              <PinComponent pin={pins[2]} />
+              <PinComponent pin={pins[5]} />
+              <PinComponent pin={pins[6]} />
+            </View>
+
+            <View style={{ flex: 1 }}>
+              <PinComponent pin={pins[3]} />
+              <PinComponent pin={pins[4]} />
+              <PinComponent pin={pins[7]} />
+              <PinComponent pin={pins[0]} />
+            </View>
+          </View>
+        </ScrollView>
       </NativeViewGestureHandler>
     </GestureHandlerRootView>
   );
@@ -20,9 +35,13 @@ export default function HomeScreen() {
 
 const styles = StyleSheet.create({
   container: {
-    margin: 10,
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
+    padding: 10,
+    flexDirection: "row",
   },
 });
+
+{
+  /* <View style={{ backgroundColor: "94ffa955", flex: 1 }}>
+</View>
+<View style={{ backgroundColor: "cd94ff55", flex: 1 }}></View> */
+}
