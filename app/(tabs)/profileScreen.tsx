@@ -1,4 +1,6 @@
 import MasonryList from "@/components/MasonryList";
+import Feather from "@expo/vector-icons/Feather";
+import Entypo from "@expo/vector-icons/Entypo";
 import * as React from "react";
 import { Text, View, StyleSheet, Image } from "react-native";
 
@@ -8,6 +10,15 @@ export default function ProfileScreen() {
   return (
     <View style={styles.container}>
       <View style={styles.profileBox}>
+        <View style={styles.iconBox}>
+          <Feather name="share" size={24} color="black" style={styles.icon} />
+          <Entypo
+            name="dots-three-horizontal"
+            size={24}
+            color="black"
+            style={styles.icon}
+          />
+        </View>
         <Image
           source={{
             uri: imageUrl,
@@ -43,5 +54,13 @@ const styles = StyleSheet.create({
   subtitle: {
     color: "#4d4b4b",
     fontWeight: "600",
+  },
+  iconBox: {
+    flexDirection: "row",
+    alignSelf: "flex-end",
+    padding: 10,
+  },
+  icon: {
+    paddingHorizontal: 8,
   },
 });
