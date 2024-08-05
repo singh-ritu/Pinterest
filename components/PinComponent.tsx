@@ -98,7 +98,9 @@ export default function PinComponent(props: Props) {
             />
           </Pressable>
         </View>
-        <Text style={styles.title}>{title}</Text>
+        <Text style={styles.title} numberOfLines={2}>
+          {title}
+        </Text>
       </View>
     </View>
   );
@@ -118,11 +120,15 @@ const styles = StyleSheet.create({
     borderRadius: 50,
   },
   title: {
-    padding: 4,
+    margin: 5,
+    fontSize: 16,
+    fontWeight: "600",
+    lineHeight: 22,
+    color: "#181818",
   },
   image: {
     width: "100%",
     height: undefined,
-    borderRadius: 25,
+    borderRadius: 15,
   },
 });

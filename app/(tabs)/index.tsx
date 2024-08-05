@@ -13,18 +13,20 @@ export default function HomeScreen() {
       <NativeViewGestureHandler>
         <ScrollView>
           <View style={styles.container}>
-            <View style={{ flex: 1 }}>
-              <PinComponent pin={pins[1]} />
-              <PinComponent pin={pins[2]} />
-              <PinComponent pin={pins[5]} />
-              <PinComponent pin={pins[6]} />
+            <View style={styles.column}>
+              {pins
+                .filter((_, index) => index % 2 === 0)
+                .map((pin) => (
+                  <PinComponent pin={pin} key={pin.id} />
+                ))}
             </View>
 
-            <View style={{ flex: 1 }}>
-              <PinComponent pin={pins[3]} />
-              <PinComponent pin={pins[4]} />
-              <PinComponent pin={pins[7]} />
-              <PinComponent pin={pins[0]} />
+            <View style={styles.column}>
+              {pins
+                .filter((_, index) => index % 2 != 0)
+                .map((pin) => (
+                  <PinComponent pin={pin} key={pin.id} />
+                ))}
             </View>
           </View>
         </ScrollView>
@@ -37,6 +39,9 @@ const styles = StyleSheet.create({
   container: {
     padding: 10,
     flexDirection: "row",
+  },
+  column: {
+    flex: 1,
   },
 });
 
