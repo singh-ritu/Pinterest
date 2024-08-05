@@ -7,8 +7,6 @@ import {
   Pressable,
   ImageSourcePropType,
 } from "react-native";
-import { pins } from "@/constants/Pins";
-import { FlatList } from "react-native-gesture-handler";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
 interface Pin {
@@ -24,7 +22,6 @@ interface Props {
 export default function PinComponent(props: Props) {
   const { image, title, id } = props.pin;
 
-  //   const [ratio, setRatio] = useState<{ [key: string]: number }>({});
   //   const [likedPin, setLikedPin] = useState<{ [key: string]: boolean }>({});
   const [ratio, setRatio] = useState(1);
 
@@ -33,19 +30,6 @@ export default function PinComponent(props: Props) {
   //       ...prevLikedPins,
   //       [id]: !prevLikedPins[id],
   //     }));
-  //   };
-
-  //   const getImageRatio = (image: any, id: string) => {
-  //     const { width, height } = Image.resolveAssetSource(image);
-  //     setRatio((prevRatio) => ({
-  //       ...prevRatio,
-  //       [id]: width / height,
-  //     }));
-  //     console.log(
-  //       `Image ID: ${id}, Width: ${width}, Height: ${height}, Ratio: ${
-  //         width / height
-  //       }`
-  //     );
   //   };
 
   useEffect(() => {
@@ -124,7 +108,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "600",
     lineHeight: 22,
-    color: "#181818",
+    color: "#4d4b4b",
   },
   image: {
     width: "100%",
