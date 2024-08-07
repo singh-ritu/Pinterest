@@ -8,6 +8,7 @@ import {
   ImageSourcePropType,
 } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
+// import { pins } from "@/constants/Pins";
 
 interface Pin {
   image: ImageSourcePropType;
@@ -22,15 +23,16 @@ interface Props {
 export default function PinComponent(props: Props) {
   const { image, title, id } = props.pin;
 
-  //   const [likedPin, setLikedPin] = useState<{ [key: string]: boolean }>({});
+  const [likedPin, setLikedPin] = useState<{ [key: string]: boolean }>({});
   const [ratio, setRatio] = useState(1);
 
-  //   const onLike = (id: string) => {
-  //     setLikedPin((prevLikedPins) => ({
-  //       ...prevLikedPins,
-  //       [id]: !prevLikedPins[id],
-  //     }));
-  //   };
+  const onLike = (id: string) => {
+    setLikedPin((prevLikedPins) => ({
+      ...prevLikedPins,
+      [id]: !prevLikedPins[id],
+    }));
+    console.log(likedPin);
+  };
 
   useEffect(() => {
     if (image) {
@@ -45,26 +47,6 @@ export default function PinComponent(props: Props) {
 
   return (
     <View>
-      {/* <FlatList
-        data={pins}
-        keyExtractor={(item) => item.id.toString()}
-        numColumns={2}
-        renderItem={({ item }) => (
-          <View style={styles.pin}>
-            <Image
-              source={item.image}
-              style={[
-                styles.image,
-                { aspectRatio: ratio[item.id.toString()] || 1 },
-              ]}
-            />
-            <View>
-              
-            </View>
-            <Text style={styles.title}>{item.title}</Text>
-          </View>
-        )}
-      /> */}
       <View style={styles.pin}>
         <View>
           <Image
@@ -73,12 +55,11 @@ export default function PinComponent(props: Props) {
           />
           <Pressable>
             <Ionicons
-              //   name={likedPin[item.id] ? "heart" : "heart-outline"}
-              name="heart"
+              name={likedPin[id] ? "heart" : "heart-outline"}
               size={16}
               color="black"
               style={styles.heartBtn}
-              //   onPress={() => onLike(item.id)}
+              onPress={() => onLike(id)}
             />
           </Pressable>
         </View>

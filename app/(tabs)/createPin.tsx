@@ -57,6 +57,7 @@ const styles = StyleSheet.create({
     width: "100%",
     aspectRatio: 1,
     marginTop: 10,
+    borderRadius: 10,
   },
   input: {
     borderWidth: 1,
